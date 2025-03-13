@@ -1,3 +1,4 @@
 dataset/
 dataset_processed/
 git_setup.ipynb
+model/
