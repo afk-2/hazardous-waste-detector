@@ -1,4 +1,57 @@
+# Google Colab specific ignores
 dataset/
 dataset_processed/
 git_setup.ipynb
 model/
+
+# Flutter & Dart specific ignores
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+pubspec.lock
+
+# Web-specific
+web/.dart_tool/
+web/.firebase/
+
+# Android-specific ignores
+android/.gradle/
+android/app/debug.keystore
+
+# iOS/macOS-specific ignores
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+macos/Pods/
+macos/.symlinks/
+macos/Flutter/GeneratedPluginRegistrant.swift
+
+# Windows-specific ignores
+windows/CMakeCache.txt
+windows/CMakeFiles/
+windows/Flutter/ephemeral/
+
+# Linux-specific ignores
+linux/CMakeFiles/
+linux/flutter/ephemeral/
+
+# VS Code settings
+.vscode/
+
+# IntelliJ/Android Studio settings
+.idea/
+
+# Xcode specific ignores
+*.xcworkspace
+xcuserdata/
+DerivedData/
+*.pbxproj
+
+# System files
+.DS_Store
+Thumbs.db
