@@ -55,3 +55,6 @@ DerivedData/
 # System files
 .DS_Store
 Thumbs.db
+
+# Vs folder
+.vs
