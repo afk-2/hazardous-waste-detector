@@ -8,6 +8,8 @@ void main() {
 }
 
 class HazScanApp extends StatelessWidget {
+  const HazScanApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,7 +23,51 @@ class HazScanApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key}); 
+
+  @override
+  HomeScreenState createState() => HomeScreenState();
+}
+
+class HomeScreenState extends State<HomeScreen> {
+  final ImagePicker _picker = ImagePicker();
+  XFile? _image;  // Variable to store the picked image
+
+  // Method to pick image from the gallery
+  Future<void> _pickImageFromGallery() async {
+    final XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _image = pickedImage;
+      });
+      _navigateToResultScreen('Non-Hazardous');  // Simulate result for now
+    }
+  }
+
+  // Method to take a photo using the camera
+  Future<void> _takePhoto() async {
+    final XFile? takenPhoto = await _picker.pickImage(source: ImageSource.camera);
+    if (takenPhoto != null) {
+      setState(() {
+        _image = takenPhoto;
+      });
+      _navigateToResultScreen('Hazardous');  // Simulate result for now
+    }
+  }
+
+  // Navigate to the ResultScreen
+  void _navigateToResultScreen(String result) {
+    if (_image != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultScreen(result: result, imagePath: _image!.path),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,30 +85,18 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton.icon(
               icon: Icon(Icons.camera_alt),
               label: Text('Take a Photo'),
-              onPressed: () {
-                // Simulate classification
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultScreen(result: 'Hazardous'),
-                  ),
-                );
-              },
+              onPressed: _takePhoto,
             ),
             SizedBox(height: 10),
             ElevatedButton.icon(
               icon: Icon(Icons.image),
               label: Text('Upload a Photo'),
-              onPressed: () {
-                // Simulate classification
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultScreen(result: 'Non-Hazardous'),
-                  ),
-                );
-              },
+              onPressed: _pickImageFromGallery,
             ),
+            if (_image != null) ...[
+              SizedBox(height: 20),
+              Image.file(File(_image!.path), height: 100, width: 100),  // Display selected image
+            ]
           ],
         ),
       ),

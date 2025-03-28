@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class ResultScreen extends StatelessWidget {
-  final String result; // Hazardous or Non-Hazardous
+  final String result;
+  final String imagePath;
 
-  ResultScreen({required this.result});
+  const ResultScreen({super.key, required this.result, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,12 @@ class ResultScreen extends StatelessWidget {
                 color: result == 'Hazardous' ? Colors.red : Colors.green,
               ),
             ),
+            SizedBox(height: 20),
+            Image.file(
+              File(imagePath),
+              height: 200,
+              width: 200,
+            ),  // Display the image
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
